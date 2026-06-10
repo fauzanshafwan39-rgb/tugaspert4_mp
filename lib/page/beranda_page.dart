@@ -3,7 +3,9 @@ import 'detail_materi_page.dart';
 import 'package:tugaspert4_mp/pertemuan/pertemuan6.dart';
 import 'package:tugaspert4_mp/pertemuan/pertemuan7.dart'; 
 import 'package:tugaspert4_mp/pertemuan/pertemuan8.dart';
-import 'package:tugaspert4_mp/pertemuan/pertemuan9.dart'; // Import Pertemuan 9 baru
+import 'package:tugaspert4_mp/pertemuan/pertemuan9.dart';
+// MENAMBAHKAN IMPORT HALAMAN PRODUCT PERTEMUAN 12
+import 'package:tugaspert4_mp/produk/list_product.dart';
 
 class BerandaPage extends StatefulWidget {
   final Function(Map<String, String>) onSave;
@@ -30,62 +32,19 @@ class _BerandaPageState extends State<BerandaPage> {
   final List<String> _categories = ['Semua', 'Teori', 'Praktikum', 'Tugas'];
   String _searchQuery = "";
 
-  // DATA MATERI UTAMA (Teks asli dipertahankan, ditambah Pertemuan 9)
+  // DATA MATERI UTAMA (Pertemuan 10 dilewati, langsung masuk Pertemuan 12)
   final List<Map<String, dynamic>> materi = [
-    {
-      "judul": "Pertemuan 1", 
-      "sub": "Pengenalan Android", 
-      "desc": "Mempelajari dasar-dasar Android Studio dan arsitektur mobile apps.",
-      "color": Colors.pinkAccent
-    },
-    {
-      "judul": "Pertemuan 2", 
-      "sub": "Widget & Button", 
-      "desc": "Eksperimen dengan berbagai widget UI seperti Row, Column, dan Button.",
-      "color": Colors.orangeAccent
-    },
-    {
-      "judul": "Pertemuan 3", 
-      "sub": "Activity & Intent", 
-      "desc": "Belajar cara berpindah halaman dan membawa data antar screen.",
-      "color": Colors.purpleAccent
-    },
-    {
-      "judul": "Pertemuan 4", 
-      "sub": "Toast & AlertDialog", 
-      "desc": "Implementasi notifikasi popup dan dialog konfirmasi user.",
-      "color": Colors.greenAccent
-    },
-    {
-      "judul": "Pertemuan 5", 
-      "sub": "ListView", 
-      "desc": "Menampilkan data dinamis dalam bentuk daftar yang bisa di-scroll.",
-      "color": Colors.blueAccent
-    },
-    {
-      "judul": "Pertemuan 6", 
-      "sub": "Checkbox", 
-      "desc": "Mengelola input pilihan ganda untuk form aplikasi.",
-      "color": Colors.tealAccent
-    },
-    {
-      "judul": "Pertemuan 7", 
-      "sub": "Radio Button", 
-      "desc": "Implementasi pilihan tunggal menggunakan widget Radio.",
-      "color": Colors.amberAccent
-    },
-    {
-      "judul": "Pertemuan 8", 
-      "sub": "Autocomplete & Spinner", 
-      "desc": "Implementasi input teks otomatis dan dropdown menu.",
-      "color": Colors.redAccent
-    },
-    {
-      "judul": "Pertemuan 9", 
-      "sub": "Date & Time Picker", 
-      "desc": "Implementasi pemilihan komponen penanggalan dan waktu sistem.",
-      "color": Colors.indigoAccent
-    },
+    {"judul": "Pertemuan 1", "sub": "Pengenalan Android", "desc": "Mempelajari dasar-dasar Android Studio.", "color": Colors.pinkAccent},
+    {"judul": "Pertemuan 2", "sub": "Widget & Button", "desc": "Eksperimen dengan berbagai widget UI.", "color": Colors.orangeAccent},
+    {"judul": "Pertemuan 3", "sub": "Activity & Intent", "desc": "Belajar cara berpindah halaman.", "color": Colors.purpleAccent},
+    {"judul": "Pertemuan 4", "sub": "Toast & AlertDialog", "desc": "Implementasi notifikasi popup.", "color": Colors.greenAccent},
+    {"judul": "Pertemuan 5", "sub": "ListView", "desc": "Menampilkan data dinamis berbentuk daftar.", "color": Colors.blueAccent},
+    {"judul": "Pertemuan 6", "sub": "Checkbox", "desc": "Mengelola input pilihan ganda untuk form.", "color": Colors.tealAccent},
+    {"judul": "Pertemuan 7", "sub": "Radio Button", "desc": "Implementasi pilihan tunggal menggunakan widget Radio.", "color": Colors.amberAccent},
+    {"judul": "Pertemuan 8", "sub": "Autocomplete & Spinner", "desc": "Implementasi input teks otomatis.", "color": Colors.redAccent},
+    {"judul": "Pertemuan 9", "sub": "Date & Time Picker", "desc": "Implementasi komponen penanggalan.", "color": Colors.indigoAccent},
+    // INTEGRASI DATA PERTEMUAN 12 KE GRID UTAMA
+    {"judul": "Pertemuan 12", "sub": "Option & Context Menu", "desc": "Latihan CRUD produk lokal dengan PopupMenuButton.", "color": Colors.deepPurpleAccent},
   ];
 
   @override
@@ -99,7 +58,7 @@ class _BerandaPageState extends State<BerandaPage> {
       backgroundColor: const Color(0xFFF8F9FD),
       body: CustomScrollView(
         slivers: [
-          // HEADER
+          // HEADER (SLIVER APP BAR)
           SliverAppBar(
             expandedHeight: 110.0,
             pinned: true,
@@ -131,7 +90,7 @@ class _BerandaPageState extends State<BerandaPage> {
             ),
           ),
 
-          // SEARCH BOX & SPINNER
+          // BOX PENCARIAN (AUTOCOMPLETE & DROPDOWN)
           SliverToBoxAdapter(
             child: Transform.translate(
               offset: const Offset(0, -25),
@@ -193,7 +152,7 @@ class _BerandaPageState extends State<BerandaPage> {
             ),
           ),
 
-          // GRID MODUL (BUBBLE STYLE)
+          // GRID KARTU MENU (BUBBLE STYLE)
           SliverPadding(
             padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
             sliver: SliverGrid(
@@ -257,6 +216,7 @@ class _BerandaPageState extends State<BerandaPage> {
     );
   }
 
+  // PENGATUR ALUR NAVIGASI KETIKA GRID DI-KLIK
   void _handleNavigation(BuildContext context, Map<String, dynamic> item) {
     if (item['judul'] == "Pertemuan 6") {
       Navigator.push(context, MaterialPageRoute(builder: (context) => const CheckboxPage()));
@@ -264,8 +224,12 @@ class _BerandaPageState extends State<BerandaPage> {
       Navigator.push(context, MaterialPageRoute(builder: (context) => const RadiobuttonPage()));
     } else if (item['judul'] == "Pertemuan 8") {
       Navigator.push(context, MaterialPageRoute(builder: (context) => const Pertemuan8Page()));
-    } else if (item['judul'] == "Pertemuan 9") { // Navigasi baru untuk Pertemuan 9
+    } else if (item['judul'] == "Pertemuan 9") {
       Navigator.push(context, MaterialPageRoute(builder: (context) => const Pertemuan9Page()));
+    } 
+    // INTEGRASI NAVIGASI PERTEMUAN 12 KE LIST PRODUCT PAGE
+    else if (item['judul'] == "Pertemuan 12") {
+      Navigator.push(context, MaterialPageRoute(builder: (context) => const ListProductPage()));
     } else {
       Navigator.push(context, MaterialPageRoute(
         builder: (context) => DetailMateriPage(
