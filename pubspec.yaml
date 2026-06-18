@@ -39,6 +39,7 @@ dependencies:
   cherry_toast: ^1.13.0
   salomon_bottom_bar: ^3.3.2
   shared_preferences: ^2.5.5
+  image_picker: ^1.2.2
 
 dev_dependencies:
   flutter_test:
