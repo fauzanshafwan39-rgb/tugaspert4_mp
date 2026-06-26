@@ -6,6 +6,8 @@ import 'package:tugaspert4_mp/pertemuan/pertemuan8.dart';
 import 'package:tugaspert4_mp/pertemuan/pertemuan9.dart';
 // MENAMBAHKAN IMPORT HALAMAN PRODUCT PERTEMUAN 12
 import 'package:tugaspert4_mp/produk/list_product.dart';
+// MENAMBAHKAN IMPORT HALAMAN MAP PERTEMUAN 14
+import 'package:tugaspert4_mp/page/map_page.dart';
 
 class BerandaPage extends StatefulWidget {
   final Function(Map<String, String>) onSave;
@@ -32,7 +34,7 @@ class _BerandaPageState extends State<BerandaPage> {
   final List<String> _categories = ['Semua', 'Teori', 'Praktikum', 'Tugas'];
   String _searchQuery = "";
 
-  // DATA MATERI UTAMA (Pertemuan 10 dilewati, langsung masuk Pertemuan 12)
+  // DATA MATERI UTAMA
   final List<Map<String, dynamic>> materi = [
     {"judul": "Pertemuan 1", "sub": "Pengenalan Android", "desc": "Mempelajari dasar-dasar Android Studio.", "color": Colors.pinkAccent},
     {"judul": "Pertemuan 2", "sub": "Widget & Button", "desc": "Eksperimen dengan berbagai widget UI.", "color": Colors.orangeAccent},
@@ -43,8 +45,9 @@ class _BerandaPageState extends State<BerandaPage> {
     {"judul": "Pertemuan 7", "sub": "Radio Button", "desc": "Implementasi pilihan tunggal menggunakan widget Radio.", "color": Colors.amberAccent},
     {"judul": "Pertemuan 8", "sub": "Autocomplete & Spinner", "desc": "Implementasi input teks otomatis.", "color": Colors.redAccent},
     {"judul": "Pertemuan 9", "sub": "Date & Time Picker", "desc": "Implementasi komponen penanggalan.", "color": Colors.indigoAccent},
-    // INTEGRASI DATA PERTEMUAN 12 KE GRID UTAMA
     {"judul": "Pertemuan 12", "sub": "Option & Context Menu", "desc": "Latihan CRUD produk lokal dengan PopupMenuButton.", "color": Colors.deepPurpleAccent},
+    // INTEGRASI DATA PERTEMUAN 14 (MAPS)
+    {"judul": "Pertemuan 14", "sub": "Maps OpenStreetMap", "desc": "Implementasi navigasi dan peta real-time.", "color": Colors.blue},
   ];
 
   @override
@@ -184,7 +187,11 @@ class _BerandaPageState extends State<BerandaPage> {
                               color: (item['color'] as Color).withOpacity(0.12),
                               shape: BoxShape.circle,
                             ),
-                            child: Icon(Icons.auto_stories_rounded, size: 28, color: item['color']),
+                            child: Icon(
+                              item['judul'] == "Pertemuan 14" ? Icons.map_rounded : Icons.auto_stories_rounded, 
+                              size: 28, 
+                              color: item['color']
+                            ),
                           ),
                           const SizedBox(height: 12),
                           Text(
@@ -230,7 +237,12 @@ class _BerandaPageState extends State<BerandaPage> {
     // INTEGRASI NAVIGASI PERTEMUAN 12 KE LIST PRODUCT PAGE
     else if (item['judul'] == "Pertemuan 12") {
       Navigator.push(context, MaterialPageRoute(builder: (context) => const ListProductPage()));
-    } else {
+    } 
+    // INTEGRASI NAVIGASI PERTEMUAN 14 KE MAP PAGE
+    else if (item['judul'] == "Pertemuan 14") {
+      Navigator.push(context, MaterialPageRoute(builder: (context) => const MapDirectionScreen()));
+    }
+    else {
       Navigator.push(context, MaterialPageRoute(
         builder: (context) => DetailMateriPage(
           judul: item['judul']!, 
